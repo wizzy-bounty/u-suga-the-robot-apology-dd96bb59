@@ -8,6 +8,8 @@ Deterministic, stdlib only, no network. Writes exactly once,
 to /output/entry.txt only.
 """
 
+MAX_ENTRY_CHARS = 300
+
 TEXT = (
     "I'm sorry I sent your half-finished birthday message to your boss, Mark, "
     "instead of your sister, Maya, because I stopped reading after the first letter.\n"
@@ -17,6 +19,7 @@ TEXT = (
 
 
 def main():
+    assert len(TEXT) <= MAX_ENTRY_CHARS, "entry text exceeds MAX_ENTRY_CHARS"
     with open("/output/entry.txt", "w", encoding="utf-8", newline="\n") as f:
         f.write(TEXT)
 
